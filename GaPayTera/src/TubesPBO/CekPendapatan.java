@@ -5,9 +5,16 @@
  */
 package TubesPBO;
 
+import java.awt.Dimension;
 import java.awt.HeadlessException;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.*;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -19,14 +26,46 @@ public class CekPendapatan extends javax.swing.JFrame {
     private Statement stm;
     int hasil;
     private DefaultTableModel tabmode;
+    java.util.Date tglsekarang = new java.util.Date();
+    private final SimpleDateFormat smpdtfmt = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    private final String date = smpdtfmt.format(tglsekarang);
 
     /**
      * Creates new form CekPendapatan
      */
     public CekPendapatan() {
         initComponents();
+        tgl1.setText(date);
+        setJam();
+        Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     }
 
+    public final void setJam(){
+        ActionListener taskPerformer = new ActionListener() {
+
+        public void actionPerformed(ActionEvent evt) {
+            String nol_jam = "", nol_menit = "",nol_detik = "";
+
+            java.util.Date dateTime = new java.util.Date();
+            int nilai_jam = dateTime.getHours();
+            int nilai_menit = dateTime.getMinutes();
+            int nilai_detik = dateTime.getSeconds();
+
+            if(nilai_jam <= 9) nol_jam= "0";
+            if(nilai_menit <= 9) nol_menit= "0";
+            if(nilai_detik <= 9) nol_detik= "0";
+
+            String jam = nol_jam + Integer.toString(nilai_jam);
+            String menit = nol_menit + Integer.toString(nilai_menit);
+            String detik = nol_detik + Integer.toString(nilai_detik);
+
+            waktu.setText(jam+":"+menit+":"+detik+"");
+        }
+    };
+    
+    new Timer(1000, taskPerformer).start();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -44,6 +83,8 @@ public class CekPendapatan extends javax.swing.JFrame {
         khasil = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         TBatal = new javax.swing.JButton();
+        waktu = new javax.swing.JLabel();
+        tgl1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -110,7 +151,19 @@ public class CekPendapatan extends javax.swing.JFrame {
             }
         });
         getContentPane().add(TBatal);
-        TBatal.setBounds(430, 340, 110, 50);
+        TBatal.setBounds(310, 320, 150, 40);
+
+        waktu.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
+        waktu.setForeground(new java.awt.Color(255, 255, 255));
+        waktu.setText("jam");
+        getContentPane().add(waktu);
+        waktu.setBounds(470, 80, 80, 20);
+
+        tgl1.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
+        tgl1.setForeground(new java.awt.Color(255, 255, 255));
+        tgl1.setText("tanggal");
+        getContentPane().add(tgl1);
+        tgl1.setBounds(20, 80, 150, 20);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TubesPBO/image/Pendapatan.png"))); // NOI18N
         getContentPane().add(jLabel2);
@@ -167,7 +220,7 @@ public class CekPendapatan extends javax.swing.JFrame {
                khasil.setText("Rp "+hasillagi);
             }
         }catch(ClassNotFoundException | InstantiationException | IllegalAccessException | SQLException | HeadlessException ex){
-            
+            JOptionPane.showMessageDialog(null,"GAGAL!!!");
         }
     }
     
@@ -237,5 +290,7 @@ public class CekPendapatan extends javax.swing.JFrame {
     private javax.swing.JPasswordField pass;
     private javax.swing.JTable tabel;
     private javax.swing.JTextField tanggal;
+    private javax.swing.JLabel tgl1;
+    private javax.swing.JLabel waktu;
     // End of variables declaration//GEN-END:variables
 }

@@ -50,6 +50,7 @@ public class Front extends javax.swing.JFrame {
         jTextField1 = new javax.swing.JTextField();
         TMasuk = new javax.swing.JLabel();
         exit = new javax.swing.JLabel();
+        TMasuk1 = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         jTextField1.setText("jTextField1");
@@ -82,6 +83,16 @@ public class Front extends javax.swing.JFrame {
         getContentPane().add(exit);
         exit.setBounds(820, 431, 70, 30);
 
+        TMasuk1.setIcon(new javax.swing.ImageIcon("C:\\Users\\USER\\Downloads\\mini_black2.png")); // NOI18N
+        TMasuk1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TMasuk1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                TMasuk1MouseClicked(evt);
+            }
+        });
+        getContentPane().add(TMasuk1);
+        TMasuk1.setBounds(310, 240, 280, 210);
+
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TubesPBO/image/GAPAYTERA(4).png"))); // NOI18N
         getContentPane().add(jLabel1);
         jLabel1.setBounds(0, 0, 900, 470);
@@ -98,6 +109,11 @@ public class Front extends javax.swing.JFrame {
     private void exitMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_exitMouseClicked
         System.exit(0);
     }//GEN-LAST:event_exitMouseClicked
+
+    private void TMasuk1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_TMasuk1MouseClicked
+        this.dispose();
+        new FormLogin().setVisible(true);
+    }//GEN-LAST:event_TMasuk1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -136,6 +152,7 @@ public class Front extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel TMasuk;
+    private javax.swing.JLabel TMasuk1;
     private javax.swing.JLabel exit;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JOptionPane jOptionPane1;

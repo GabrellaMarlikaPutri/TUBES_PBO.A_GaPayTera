@@ -114,17 +114,17 @@ public class Bayar extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(428, 504));
         getContentPane().setLayout(null);
 
-        waktu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        waktu.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
         waktu.setForeground(new java.awt.Color(255, 255, 255));
-        waktu.setText("tanggal");
+        waktu.setText("jam");
         getContentPane().add(waktu);
-        waktu.setBounds(510, 100, 130, 20);
+        waktu.setBounds(600, 100, 130, 20);
 
-        tgl1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        tgl1.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
         tgl1.setForeground(new java.awt.Color(255, 255, 255));
         tgl1.setText("tanggal");
         getContentPane().add(tgl1);
-        tgl1.setBounds(190, 100, 150, 20);
+        tgl1.setBounds(110, 100, 150, 20);
 
         id_kartu.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         getContentPane().add(id_kartu);
@@ -188,7 +188,7 @@ public class Bayar extends javax.swing.JFrame {
         jScrollPane2.setViewportView(fstruk);
 
         getContentPane().add(jScrollPane2);
-        jScrollPane2.setBounds(460, 260, 290, 360);
+        jScrollPane2.setBounds(400, 250, 290, 360);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TubesPBO/image/Payment.png"))); // NOI18N
         getContentPane().add(jLabel1);

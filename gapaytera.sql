@@ -1,13 +1,15 @@
 -- phpMyAdmin SQL Dump
--- version 4.5.1
--- http://www.phpmyadmin.net
+-- version 4.8.5
+-- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 17, 2019 at 06:25 AM
--- Server version: 10.1.9-MariaDB
--- PHP Version: 7.0.0
+-- Generation Time: May 17, 2019 at 05:00 AM
+-- Server version: 10.1.38-MariaDB
+-- PHP Version: 7.3.3
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
 SET time_zone = "+00:00";
 
 
@@ -29,21 +31,18 @@ SET time_zone = "+00:00";
 CREATE TABLE `aktivasikartu` (
   `ID_Kartu` varchar(9) NOT NULL,
   `Password_Kartu` varchar(6) NOT NULL,
-  `Saldo` int(9) DEFAULT NULL
+  `Saldo` int(9) DEFAULT NULL,
+  `No_Identitas` varchar(20) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `aktivasikartu`
 --
 
-INSERT INTO `aktivasikartu` (`ID_Kartu`, `Password_Kartu`, `Saldo`) VALUES
-('160016001', 'hihihi', 13000),
-('160016002', 'yayaya', 100000),
-('160016003', 'lalala', 60000),
-('160016004', 'wewewe', 80000),
-('160016005', 'rikaaa', 0),
-('160016006', 'tisyaa', 0),
-('160016007', 'asikkk', 0);
+INSERT INTO `aktivasikartu` (`ID_Kartu`, `Password_Kartu`, `Saldo`, `No_Identitas`) VALUES
+('160016001', 'fatin', 50000, '14117087'),
+('160016002', 'gabrel', 50000, '14117025'),
+('160016003', 'agus', 48000, '14117066');
 
 -- --------------------------------------------------------
 
@@ -133,13 +132,25 @@ CREATE TABLE `pendapatan` (
 --
 
 INSERT INTO `pendapatan` (`No_Transaksi`, `Tgl_Transaksi`, `Pemasukan`) VALUES
-(1, '05-05-2019', 20000),
-(2, '05-05-2019', 20000),
-(3, '06-05-2019', 20000),
-(4, '06-05-2019', 25000),
-(5, '06-05-2019', 70000),
-(6, '17-05-2019', 2000),
-(7, '17/05/2019', 20000);
+(1, '05/05/2019', 20000),
+(2, '05/05/2019', 20000),
+(3, '06/05/2019', 20000),
+(4, '06/05/2019', 25000),
+(5, '06/05/2019', 70000),
+(6, '06/05/2019', 5000),
+(7, '15/05/2019', 2000),
+(8, '15/05/2019', 2000),
+(9, '15/05/2019', 2000),
+(10, '16/05/2019', 2000),
+(11, '16/05/2019', 2000),
+(12, '16/05/2019', 2000),
+(13, '16/05/2019', 2000),
+(14, '16/05/2019', 2000),
+(15, '16/05/2019', 2000),
+(16, '16/05/2019', 2000),
+(17, '16/05/2019', 500),
+(18, '16/05/2019', 50),
+(19, '17/05/2019', 2000);
 
 --
 -- Indexes for dumped tables
@@ -149,7 +160,8 @@ INSERT INTO `pendapatan` (`No_Transaksi`, `Tgl_Transaksi`, `Pemasukan`) VALUES
 -- Indexes for table `aktivasikartu`
 --
 ALTER TABLE `aktivasikartu`
-  ADD PRIMARY KEY (`ID_Kartu`);
+  ADD PRIMARY KEY (`ID_Kartu`),
+  ADD KEY `No_Identitas` (`No_Identitas`);
 
 --
 -- Indexes for table `datacivitas`
@@ -168,6 +180,17 @@ ALTER TABLE `loginkaryawan`
 --
 ALTER TABLE `pendapatan`
   ADD PRIMARY KEY (`No_Transaksi`);
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `aktivasikartu`
+--
+ALTER TABLE `aktivasikartu`
+  ADD CONSTRAINT `aktivasikartu_ibfk_1` FOREIGN KEY (`No_Identitas`) REFERENCES `datacivitas` (`No_Identitas`) ON DELETE CASCADE;
+COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

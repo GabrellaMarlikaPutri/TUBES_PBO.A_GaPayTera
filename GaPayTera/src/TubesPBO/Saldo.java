@@ -38,9 +38,9 @@ public class Saldo extends javax.swing.JFrame {
         pass_kartu = new javax.swing.JPasswordField();
         fCek = new javax.swing.JButton();
         fTambahSaldo = new javax.swing.JButton();
-        tgl1 = new javax.swing.JLabel();
-        waktu = new javax.swing.JLabel();
         TBatal = new javax.swing.JButton();
+        waktu = new javax.swing.JLabel();
+        tgl1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -81,18 +81,6 @@ public class Saldo extends javax.swing.JFrame {
         getContentPane().add(fTambahSaldo);
         fTambahSaldo.setBounds(220, 590, 170, 50);
 
-        tgl1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        tgl1.setForeground(new java.awt.Color(255, 255, 255));
-        tgl1.setText("tanggal");
-        getContentPane().add(tgl1);
-        tgl1.setBounds(80, 210, 150, 20);
-
-        waktu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        waktu.setForeground(new java.awt.Color(255, 255, 255));
-        waktu.setText("tanggal");
-        getContentPane().add(waktu);
-        waktu.setBounds(430, 210, 130, 20);
-
         TBatal.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         TBatal.setText("BATAL");
         TBatal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -103,6 +91,18 @@ public class Saldo extends javax.swing.JFrame {
         });
         getContentPane().add(TBatal);
         TBatal.setBounds(410, 590, 110, 50);
+
+        waktu.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
+        waktu.setForeground(new java.awt.Color(255, 255, 255));
+        waktu.setText("JAM");
+        getContentPane().add(waktu);
+        waktu.setBounds(440, 210, 130, 20);
+
+        tgl1.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
+        tgl1.setForeground(new java.awt.Color(255, 255, 255));
+        tgl1.setText("tanggal");
+        getContentPane().add(tgl1);
+        tgl1.setBounds(50, 210, 150, 20);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TubesPBO/image/Ga-PaySaldo2.png"))); // NOI18N
         getContentPane().add(jLabel2);

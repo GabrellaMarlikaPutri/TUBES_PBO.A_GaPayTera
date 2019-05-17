@@ -1,29 +1,62 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package TubesPBO;
 
 import com.mysql.jdbc.Connection;
+import java.awt.Dimension;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Locale;
 import javax.swing.JOptionPane;
+import javax.swing.Timer;
 
-/**
- *
- * @author ASUS
- */
-public class AktivasiKartu extends javax.swing.JFrame {
-
+public class AktivasiKartu extends javax.swing.JFrame  {
+    java.util.Date tglsekarang = new java.util.Date();
+    private final SimpleDateFormat smpdtfmt = new SimpleDateFormat("dd/MM/yyyy", Locale.getDefault());
+    //diatas adalah pengaturan format penulisan, bisa diubah sesuai keinginan.
+    private final String date = smpdtfmt.format(tglsekarang);
     /**
      * Creates new form AktivasiKartu
      */
-    public AktivasiKartu() {
+    public AktivasiKartu(String input) {
         initComponents();
+        LNim.setText(input);
+        tgl1.setText(date);
+        setJam();
+        Dimension screen=Toolkit.getDefaultToolkit().getScreenSize();
     }
 
+        public final void setJam(){
+    ActionListener taskPerformer = new ActionListener() {
+
+        public void actionPerformed(ActionEvent evt) {
+            String nol_jam = "", nol_menit = "",nol_detik = "";
+
+            java.util.Date dateTime = new java.util.Date();
+            int nilai_jam = dateTime.getHours();
+            int nilai_menit = dateTime.getMinutes();
+            int nilai_detik = dateTime.getSeconds();
+
+            if(nilai_jam <= 9) nol_jam= "0";
+            if(nilai_menit <= 9) nol_menit= "0";
+            if(nilai_detik <= 9) nol_detik= "0";
+
+            String jam = nol_jam + Integer.toString(nilai_jam);
+            String menit = nol_menit + Integer.toString(nilai_menit);
+            String detik = nol_detik + Integer.toString(nilai_detik);
+
+            waktu.setText(jam+":"+menit+":"+detik+"");
+        }
+    };
+    
+    new Timer(1000, taskPerformer).start();
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,8 +69,11 @@ public class AktivasiKartu extends javax.swing.JFrame {
         id_kartu = new javax.swing.JTextField();
         pass_id = new javax.swing.JPasswordField();
         pass_ver = new javax.swing.JPasswordField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        TAktivasi = new javax.swing.JButton();
+        TBatal = new javax.swing.JButton();
+        LNim = new javax.swing.JLabel();
+        tgl1 = new javax.swing.JLabel();
+        waktu = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -53,7 +89,7 @@ public class AktivasiKartu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(id_kartu);
-        id_kartu.setBounds(80, 290, 420, 50);
+        id_kartu.setBounds(70, 290, 420, 50);
 
         pass_id.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         pass_id.setBorder(null);
@@ -63,7 +99,7 @@ public class AktivasiKartu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(pass_id);
-        pass_id.setBounds(80, 390, 420, 40);
+        pass_id.setBounds(70, 400, 420, 40);
 
         pass_ver.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         pass_ver.setBorder(null);
@@ -73,31 +109,49 @@ public class AktivasiKartu extends javax.swing.JFrame {
             }
         });
         getContentPane().add(pass_ver);
-        pass_ver.setBounds(90, 490, 410, 40);
+        pass_ver.setBounds(80, 490, 410, 40);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(153, 153, 0));
-        jButton1.setText("AKTIFKAN KARTU");
-        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        TAktivasi.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TAktivasi.setForeground(new java.awt.Color(153, 153, 0));
+        TAktivasi.setText("AKTIFKAN KARTU");
+        TAktivasi.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TAktivasi.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                TAktivasiActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1);
-        jButton1.setBounds(100, 570, 210, 60);
+        getContentPane().add(TAktivasi);
+        TAktivasi.setBounds(100, 570, 210, 60);
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(153, 153, 0));
-        jButton2.setText("BATAL");
-        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        TBatal.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        TBatal.setForeground(new java.awt.Color(153, 153, 0));
+        TBatal.setText("BATAL");
+        TBatal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        TBatal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                TBatalActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton2);
-        jButton2.setBounds(350, 570, 130, 60);
+        getContentPane().add(TBatal);
+        TBatal.setBounds(350, 570, 130, 60);
+
+        LNim.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        LNim.setForeground(new java.awt.Color(153, 153, 0));
+        LNim.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(LNim);
+        LNim.setBounds(180, 220, 210, 40);
+
+        tgl1.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
+        tgl1.setForeground(new java.awt.Color(255, 255, 255));
+        tgl1.setText("tanggal");
+        getContentPane().add(tgl1);
+        tgl1.setBounds(20, 120, 110, 20);
+
+        waktu.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
+        waktu.setForeground(new java.awt.Color(255, 255, 255));
+        waktu.setText("jam");
+        getContentPane().add(waktu);
+        waktu.setBounds(450, 120, 90, 20);
 
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TubesPBO/image/Ga-PayAktivasi.png"))); // NOI18N
         getContentPane().add(jLabel2);
@@ -119,13 +173,37 @@ public class AktivasiKartu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_pass_verActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       try{
+    private void TAktivasiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TAktivasiActionPerformed
+        try{
+            Connection koneksi = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/gapaytera","root","");
+            Statement stat = koneksi.createStatement();
+            ResultSet RaUser = stat.executeQuery("SELECT * FROM aktivasikartu WHERE ID_Kartu='"+id_kartu.getText()+"'");
+            System.out.println("Data Is Exist");
+            if(RaUser.next()){
+                JOptionPane.showMessageDialog(null,"ID KARTU SUDAH ADA","Cari Civitas",JOptionPane.WARNING_MESSAGE);
+                id_kartu.setText("");
+                pass_id.setText("");
+                pass_ver.setText("");
+            }else{
+                Aktivasi_Akun();
+            }
             
+        }catch(SQLException ex){
+            JOptionPane.showMessageDialog(null, ex);
+        }
+    }//GEN-LAST:event_TAktivasiActionPerformed
+
+    private void TBatalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_TBatalActionPerformed
+        this.dispose();
+        new Menu().setVisible(true);
+    }//GEN-LAST:event_TBatalActionPerformed
+
+    public void Aktivasi_Akun(){
+       try{
            if(pass_ver.getText().equals(pass_id.getText())){
                 Connection koneksi = (Connection) DriverManager.getConnection("jdbc:mysql://localhost/gapaytera","root","");
                 Statement stat = koneksi.createStatement();
-                String sql = "INSERT INTO aktivasikartu VALUES('"+id_kartu.getText()+"','"+pass_id.getText()+"',"+"0)";
+                String sql = "INSERT INTO aktivasikartu VALUES('"+id_kartu.getText()+"','"+pass_id.getText()+"','"+"0"+"','"+LNim.getText()+"')";
             
                 stat.executeUpdate(sql);
                 JOptionPane.showMessageDialog(null, "AKTIVASI BERHASIL", "Aktivasi Kartu Ga-PayTera", JOptionPane.INFORMATION_MESSAGE);
@@ -139,56 +217,24 @@ public class AktivasiKartu extends javax.swing.JFrame {
                pass_ver.requestFocus(); //yang ini harus ada fatin biar dia kursornya langsung kekolomnya jadi karena salah dia yang dikosongin diverfikasinya aja
                 }              
        }catch(SQLException ex){
-           JOptionPane.showMessageDialog(null, "Koneksi Gagal!", "Informasi", JOptionPane.WARNING_MESSAGE);
-       }
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        this.dispose();
-        new Menu().setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+           JOptionPane.showMessageDialog(null, "Aktivasi GAGAL!!", "Informasi", JOptionPane.WARNING_MESSAGE);
+       }        
+    }
+    
     /**
      * @param args the command line arguments
      */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AktivasiKartu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AktivasiKartu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AktivasiKartu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AktivasiKartu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new AktivasiKartu().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel LNim;
+    private javax.swing.JButton TAktivasi;
+    private javax.swing.JButton TBatal;
     private javax.swing.JTextField id_kartu;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField pass_id;
     private javax.swing.JPasswordField pass_ver;
+    private javax.swing.JLabel tgl1;
+    private javax.swing.JLabel waktu;
     // End of variables declaration//GEN-END:variables
 }

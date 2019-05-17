@@ -247,7 +247,9 @@ public class Saldo extends javax.swing.JFrame {
             Statement stat = conn.createStatement();
             String in = "INSERT INTO pendapatan VALUES("+i+",'"+tgl+"','"+keluaran+"')";
             stat.executeUpdate(in);
-            JOptionPane.showMessageDialog(null, "PEMBAYARAN BERHASIL DICATAT", "PAYMENT with Ga-PayTera", JOptionPane.INFORMATION_MESSAGE);                             
+            JOptionPane.showMessageDialog(null, "PEMBAYARAN BERHASIL DICATAT", "PAYMENT with Ga-PayTera", JOptionPane.INFORMATION_MESSAGE); 
+            this.dispose();
+            new Menu().setVisible(true);
             }catch(SQLException | HeadlessException ex){
                 JOptionPane.showMessageDialog(null, "Transaksi Gagal !!!","",JOptionPane.WARNING_MESSAGE);
             }

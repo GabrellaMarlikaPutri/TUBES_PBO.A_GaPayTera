@@ -75,8 +75,8 @@ public class Menu extends javax.swing.JFrame {
         jButton3 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
-        tgl = new javax.swing.JLabel();
         waktu = new javax.swing.JLabel();
+        tgl = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -145,17 +145,17 @@ public class Menu extends javax.swing.JFrame {
         getContentPane().add(jButton6);
         jButton6.setBounds(320, 510, 190, 60);
 
-        tgl.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
-        tgl.setForeground(new java.awt.Color(255, 255, 255));
-        tgl.setText("tanggal");
-        getContentPane().add(tgl);
-        tgl.setBounds(60, 110, 150, 20);
-
-        waktu.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        waktu.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
         waktu.setForeground(new java.awt.Color(255, 255, 255));
         waktu.setText("jam");
         getContentPane().add(waktu);
         waktu.setBounds(400, 110, 120, 20);
+
+        tgl.setFont(new java.awt.Font("Perpetua Titling MT", 1, 18)); // NOI18N
+        tgl.setForeground(new java.awt.Color(255, 255, 255));
+        tgl.setText("tanggal");
+        getContentPane().add(tgl);
+        tgl.setBounds(60, 110, 150, 20);
 
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/TubesPBO/image/Ga-payMenu.png"))); // NOI18N
         getContentPane().add(jLabel1);
